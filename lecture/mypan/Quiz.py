@@ -1,5 +1,5 @@
 import string
-from random import random
+import random
 
 import numpy as np
 import pandas as pd
@@ -78,6 +78,7 @@ class MyPan(object):
         df = pd.DataFrame(np.random.randint(0, 100, (10, 4)), columns=['국어', '영어', '수학', '사회'], index=id)
         ic(df)
         return df
+
         ''' 
         Q5 4번 문제를 loc 를 통해 동일하게 작성
         ic| df5:        국어  영어  수학  사회
@@ -146,7 +147,7 @@ class MyPan(object):
         '''
 
     def quiz_5_4(self):
-        df = pd.read_csv('students1.csv', index_col=0)
+        df = pd.read_csv('students5.csv', index_col=0)
         df['총점'] = df.sum(axis=1)
         ic(df)
         df.to_csv('student7.csv')
@@ -167,13 +168,18 @@ class MyPan(object):
         '''
 
     def quiz_5_5(self):
-        df = pd.read_csv('students.csv', index_col=0)
-        ic(df.loc[:, ['총점']])
+        df = pd.read_csv('student7.csv', index_col=0)
+        ls = [df['국어'].sum(),df['영어'].sum(), df['수학'].sum(), df['사회'].sum(), df['과학'].sum(), df['총점'].sum()]
+        ic(ls)
         ''' 
         Q5-5 각 학생들의 점수의 총합을 리스트로 출력
             ic| ls: [547, 536, 533, 319, 376, 2311]
         '''
-
+    def quiz_5_6(self):
+        df = pd.read_csv('student7.csv', index_col=0)
+        new_data = {}
+        df = df.loc[10] =[df['국어'].sum(),df['영어'].sum(), df['수학'].sum(), df['사회'].sum(), df['과학'].sum(), df['총점'].sum()]
+        ic(df)
         ''' 
         Q5-6 각 학생들의 점수의 총합과 마지막 행은 과목총점 추가해서 출력
         ic| df5:  국어   영어   수학   사회   과학    총점
@@ -512,6 +518,3 @@ class MyPan(object):
         ic| df14.to_dict(): {'A': {0: 1, 1: 2, 2: 3}, 'B': {0: 4, 1: 5, 2: 6}}
         '''
 
-
-if __name__ == '__main__':
-    MyPandas()
