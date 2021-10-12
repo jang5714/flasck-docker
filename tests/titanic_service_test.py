@@ -1,6 +1,5 @@
 import unittest
-import os
-from titanic.models.service import TitanicService
+from lecture.titanic import TitanicService
 
 class TitanicServiceTest(unittest.TestCase):
 

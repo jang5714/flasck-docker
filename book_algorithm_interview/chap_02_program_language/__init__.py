@@ -1,0 +1,2 @@
+class OneToTenSum:
+    pass
