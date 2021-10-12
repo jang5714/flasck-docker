@@ -1,3 +1,4 @@
+import numbers
 import string
 
 import pandas as pd
@@ -38,40 +39,68 @@ class Conversion(object):
         df = self.dictionary_to_dataframe(dic)
         ic(type(df))
         ic(df)
-
+        print('Q9. 1번 튜플의 제곱을 요소로 갖는 리스트 출력')
+        lst = self.tuple_square(self.create_tuple())
+        ic(type(lst))
+        ic(lst)
+        print('Q10. 구구단 한 줄 출력 2*1=2, 2*2=4, ..., 9*9=81')
+        lst = self.gugudan(self.create_tuple())
+        ic(type(lst))
+        ic(lst)
+        print('Q11. 1번 튜플에서 3의 배수만 문자열로 갖는 리스트 출력')
+        ls = self.three_multi_change_str(self.create_tuple())
+        ic(type(ls))
+        ic(ls)
     def create_tuple(self) -> ():
-        tpl = tuple(range(1,10))
-        return tpl
+        # tpl = tuple(range(1,10))
+        return tuple(range(1,10))
 
     def tuple_to_list(self, tpl) -> []:
-        lst = list(tpl)
-        return lst
+        # lst = list(tpl)
+        return list(tpl)
 
     def int_to_float(self, lst) -> []:
+        m = map(float, lst)
+        ic(type(m))
+        ic(type(1))
         # lst = list(map(float, lst))
-        lst = [float(x) for x in lst]
-        return lst
+        # lst = [float(i) for i in lst]
+        return [float(i) for i in lst]
 
     def float_to_int(self, lst) -> []:
         # lst = list(map(int, lst))
-        lst = [int(x) for x in lst]
-        return lst
+        # lst = [int(i) for i in lst]
+        return [int(i) for i in lst]
 
-    def list_to_dictionary(self,lst) -> {}:
+    def list_to_dictionary(self, lst) -> {}:
         # dictionary = dict.fromkeys([str(x) for x in lst],[i for i in range(9)])
         return {str(i): i for i in lst}
 
-    def hello_to_tuple(self, str:str) -> ():
-        tpl = tuple(str)
-        return tpl
+    def hello_to_tuple(self, str: str) -> ():
+        # tpl = tuple(str)
+        return tuple(str)
 
     def hello_to_list(self, tpl) -> []:
-        lst = list(tpl)
-        return lst
+        # lst = list(tpl)
+        return list(tpl)
 
     def dictionary_to_dataframe(self, dic) -> object:
         df = pd.DataFrame.from_dict(dic, orient='index')
         return df
+
+    def tuple_square(self, tpl) ->[]:
+        # return [i**2 for i in tpl]
+        return list(map(lambda x: pow(x, 2), tpl))
+        # 내장 함수가 아닐때 lambda 로 처리 해야 한다.
+
+    def three_multi_change_str(self, tpl) -> []:
+        return list(map(lambda x: str(x) if x % 3 == 0 else x, tpl))
+
+    # print('Q10. 구구단 한 줄 출력 2*1=2, 2*2=4, ..., 9*9=81')
+    def gugudan(self, tpl) -> []:
+        # return [(lambda x, y: '{}x{}={}'.format(x,y, x*y))(x,y) for x in range(2, 10) for y in range(1,10)]
+        # return list(map(lambda x : f'{x} x {i} = {x*i}' for i in range(1,10)], tpl))
+        return list(map(lambda x: list(map(lambda i: f'{x} x{i}={x*i}',range(1,10))),tpl))
 
 if __name__ == '__main__':
     Conversion()
