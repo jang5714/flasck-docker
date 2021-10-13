@@ -51,6 +51,19 @@ class Conversion(object):
         ls = self.three_multi_change_str(self.create_tuple())
         ic(type(ls))
         ic(ls)
+        print("Q12. 키는 a, b, c 이고 값은[1,2,3],[4,5,6],[7,8,9] 인 딕셔너리 출력")
+        dt = self.abc_dict()
+        ic(type(dt))
+        ic(dt)
+        print("Q13. 12번 딕셔너리에서 키값을 인덱스로 갖는 데이터프레임 출력")
+        df = self.orient_index(dt)
+        ic(type(df))
+        ic(df)
+        print('Q14. 12번 딕셔너리에서 키값을 컬럼으로 갖는 데이터프레임 출력')
+        df = self.orient_column(dt)
+        ic(type(df))
+        ic(df)
+
     def create_tuple(self) -> ():
         # tpl = tuple(range(1,10))
         return tuple(range(1,10))
@@ -101,6 +114,16 @@ class Conversion(object):
         # return [(lambda x, y: '{}x{}={}'.format(x,y, x*y))(x,y) for x in range(2, 10) for y in range(1,10)]
         # return list(map(lambda x : f'{x} x {i} = {x*i}' for i in range(1,10)], tpl))
         return list(map(lambda x: list(map(lambda i: f'{x} x{i}={x*i}',range(1,10))),tpl))
+
+    def abc_dict(self):
+        return {'a':[1,2,3], 'b':[4,5,6], 'c':[7,8,9]}
+
+    def orient_index(self, dt):
+        return pd.DataFrame()\
+            .from_dict(dt, orient='index')
+
+    def orient_column(self, dt):
+        return pd.DataFrame().from_dict(dt)
 
 if __name__ == '__main__':
     Conversion()
