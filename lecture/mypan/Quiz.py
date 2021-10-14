@@ -7,9 +7,16 @@ from icecream import ic
 
 
 class MyPan(object):
+
+    pd.DataFrame()
+    pd.DataFrame
+
+
+
     def __init__(self):
         self.id = ["".join([random.choice(string.ascii_letters) for i in range(5)]) for i in range(10)]
         self.score = np.random.randint(0, 101, (10, 4))
+        self.score2 = np.random.randint(0,100)
         self.student_columns = ['국어','영어','수학','사회','과학']
         self.animal_df = pd.read_csv('animal.csv', index_col=0)
         self.animal_df2 = pd.read_csv('animal1.csv', index_col=0)
@@ -72,7 +79,6 @@ class MyPan(object):
         return df
 
         ''' 
-
         Q4 국어, 영어, 수학, 사회 4과목을 시험치른 10명의 학생들의 성적표 작성. 단 점수 0 ~ 100이고 학생은 랜덤 알파벳 5자리 ID 로 표기
         ic| self.id(): 'HKKHc'
         ic| self.score(): 22
@@ -87,13 +93,69 @@ class MyPan(object):
                QDBCw  44  32   8  29
                PZOTP  94  78  79  96
                GOJKU  62  17  75  49
-
         '''
 
     def quiz_5(self):
-        print(self.quiz_4()['국어'])
+        # print(self.quiz_4()['국어'])
+        # df_by_other_method = pd.DataFrame({
+        #     '국어': self.score,
+        #     '영어': self.score,
+        #     '수학': self.score,
+        #     '사회': self.score
+        #
+        # }, index=[self.id])
 
+        # for i in range(1, 10):
+        #     df_by_other_method.loc[self.id] = {
+        #         '국어': self.score,
+        #         '영어': self.score,
+        #         '수학': self.score,
+        #         '사회': self.score
+        #     }
+        # ic(df_by_other_method)
+        # df5 = pd.DataFrame([[]], index=[self.id])
+        # df5 = [lambda x : df5.loc[self.id] for i in range(1,10)]
+        # print(df5)
+        # ic(df5)
+        '''
+        score = [np.random.randint(0,100) for i in range(1,5)]
+        subject = ['국어','영어','영어','수학']
+        dc = dict(zip(subject,score))
+        student = "".join(random.choice(string.ascii_letters) for i in range(5))
+        df10 = pd.DataFrame(dc, index=["".join(random.choice(string.ascii_letters) for i in range(5))])
+
+        for i in range(1, 10):
+            df5.loc["".join(random.choice(string.ascii_letters) for i in range(5))] = \
+                dict(zip(subjects, list(map(lambda x: np.random.randint(0, 101), range(5)))))
+        '''
+
+        df5 = pd.DataFrame({zip(['국어','영어','영어','수학'],[np.random.randint(0,100) for i in range(1,5)])},
+                           index=["".join([random.choice(string.ascii_letters) for i in range(5)]) for i in range(10)])
+        # df6 = pd.DataFrame([[]] , index=[], columns=[])
+        ls = [list(map())]
+        print(df5)
+        ic(df5)
         ''' 
+
+        df = pd.DataFrame()
+        name_list = []
+        df['국어'] = 0
+        df['영어'] = 0
+        df['수학'] = 0
+        df['사회'] = 0
+        df['과학'] = 0
+        
+        df.loc['ckSVA'] = [93,44,14,94]
+        df.loc['CAOot'] = [25, 54, 29, 10]
+        df.loc['fZTCh'] = [82, 65, 31, 31]
+        df.loc['mqZJJ'] = [51, 56, 56, 3]
+        df.loc['BKlLt'] = [34, 32, 67, 48]
+        df.loc['KKYUN'] = [85, 24, 16, 8]
+        df.loc['WAjFK'] = [28, 80, 52,43]
+        df.loc['yBVgG'] = [25, 94, 93, 54]
+        df.loc['lGmwZ'] = [32, 50, 95, 1]
+        df.loc['GQzmY'] = [26, 37, 80, 27]
+            
         Q5 4번 문제를 loc 를 통해 동일하게 작성
         ic| df5:        국어  영어  수학  사회
                  ckSVA  93  44  14  94
@@ -111,12 +173,12 @@ class MyPan(object):
     def quiz_5_1(self):
         scores = [list(map(lambda x:np.random.randint(0, 101), [i for i in range(1, 5)])) for i in range(1, 11)]
         id = ["".join([random.choice(string.ascii_letters) for i in range(5)]) for i in range(10)]
-
-        df = pd.DataFrame(np.random.randint(0, 100, (10, 4)), columns=['국어', '영어', '수학', '사회'], index=id)
         df2 = pd.DataFrame(scores, columns=['국어', '영어', '수학', '사회'], index=id)
+        # df = pd.DataFrame(np.random.randint(0, 100, (10, 4)), columns=['국어', '영어', '수학', '사회'], index=id)
         # dfc = pd.read_csv('students5.csv', index_col=0)
         # dfc.drop(['Unnamed: 0'], axis = 1, inplace = True)
         ic(df2)
+        ic(df2.loc[:,'국어'])
         # print(dfc['국어'])
 
         ''' 
@@ -141,7 +203,7 @@ class MyPan(object):
         return df
 
         ''' 
-        Q5-2 TdQOI 점수만 출력
+        Q5-2 1등 점수만 출력
         ic| TdQOI	15	42	59	67
 
         '''
@@ -152,6 +214,7 @@ class MyPan(object):
         ic(df)
         df.to_csv('student7.csv')
 
+        df.loc[:,'과학'] = pd.Series([], index=df.index)
 
         ''' 
         Q5-3 기존 학생들에게 과학과목과 점수를 랜덤으로 추가
@@ -170,6 +233,7 @@ class MyPan(object):
 
     def quiz_5_4(self):
         df = pd.read_csv('student7.csv', index_col=0)
+        # df['총점'] = df.sum(axis=1)
         ls = [df['국어'].sum(), df['영어'].sum(), df['수학'].sum(), df['사회'].sum(), df['과학'].sum(), df['총점'].sum()]
         ic(ls)
 
@@ -191,11 +255,15 @@ class MyPan(object):
 
     def quiz_5_5(self):
         df = pd.read_csv('student7.csv', index_col=0)
-        new_data = {}
         df = df.loc[10] = [df['국어'].sum(), df['영어'].sum(), df['수학'].sum(), df['사회'].sum(), df['과학'].sum(),df['총점'].sum()]
         ic(df)
 
+
+
         ''' 
+        ls5 = df5.sum().tolist()
+        ic(ls5)
+        
         Q5-5 각 학생들의 점수의 총합을 리스트로 출력
             ic| ls: [547, 536, 533, 319, 376, 2311]
         '''
@@ -208,6 +276,8 @@ class MyPan(object):
         df.to_csv('student8.csv')
         ic(df)
         ''' 
+        df5.loc['과목총점'] = ls5
+        
         Q5-6 각 학생들의 점수의 총합과 마지막 행은 과목총점 추가해서 출력
         ic| df5:  국어   영어   수학   사회   과학    총점
                  hVoGW   93   44   14   94   86   331
@@ -227,6 +297,9 @@ class MyPan(object):
         df2 = df.drop(['과목총점'])
         ic(df2)
         ''' 
+        df5.drop('과목총점', inplace=True)
+        ic(df5)
+                     
         Q5-7 방금 추가한 과목총점 삭제
         ic| df5:  국어  영어  수학  사회  과학   총점
                  hVoGW  93  44  14  94  86  331
@@ -244,7 +317,10 @@ class MyPan(object):
         df = pd.read_csv('student8.csv', index_col=0)
         df2 = df.sort_values('총점', ascending=False)
         ic(df2)
-        '''                         
+        '''        
+        df5.sort_values(by=['총점'], ascending=False, inplace=True)
+        ic(df5)
+        
         Q5-8 총점 열 기준 내림차순 정렬
                  wuxIm  58  94  93  54  83  382
                  hVoGW  93  44  14  94  86  331
@@ -350,7 +426,7 @@ class MyPan(object):
                                       h    cat  NaN       1      yes
         '''
 
-    def quiz_6_6(self):
+    def quiz_6_7(self):
         dfo = self.animal_df
         ic(dfo[(dfo['age'] <3) & (dfo['animal'] =='cat')])
         '''         
@@ -360,7 +436,7 @@ class MyPan(object):
                                                             f    cat  2.0       3       no
         '''
 
-    def quiz_6_7(self):
+    def quiz_6_8(self):
         dfo = self.animal_df
         ic(dfo[dfo['age'].between(2,4)])
         '''        
@@ -375,7 +451,9 @@ class MyPan(object):
         dfo = self.animal_df
         dfo['age'] = dfo['age'].replace([2.0],1.5)
         ic(dfo)
-        '''                    
+        '''
+        df6.loc['f','age'] = 1.5
+                              
         6-9 f 행의 나이를 1.5살로 변경
                  a    cat  2.5       1      yes
                  b    cat  3.0       3      yes
@@ -412,7 +490,9 @@ class MyPan(object):
         dfo2 = dfo.append(new_data, ignore_index=True)
         ic(dfo2)
         return dfo2
-        '''        
+        '''
+        df6.loc['k'] = ['dog', 5.5,2,'no']
+                
         6-12 k행을 추가하여 dog , 5.5세, 방문회수 2회, 우선권없음(no) 열을 추가
                  a    cat  2.5       1      yes
                  b    cat  3.0       3      yes
@@ -430,7 +510,9 @@ class MyPan(object):
         dfo = self.quiz_6_12()
         df = dfo.drop(10)
         ic(df)
-        '''         
+        '''
+        df6.drop('k', inplace=True) # del df['k'] 도 같음
+                 
         6-13 방금 추가한 열 삭제
         ic| df6:   animal  age  visits priority
                  a    cat  2.5       1      yes
@@ -476,6 +558,8 @@ class MyPan(object):
         dfo['priority'] = dfo['priority'].apply(lambda x : True if x == 'yes' else False)
         ic(dfo)
         '''  
+        df6['priority'] = df6['priority'].map({'yes': True, 'no': False})
+        
         6-16 priority 의 yes를 True, no 를 False  로 맵핑 후 출력
         ic| df6:   animal  age  visits  priority
                  a    cat  2.5       1      True
@@ -495,7 +579,9 @@ class MyPan(object):
         dfo.to_csv('animal1.csv')
         ic(dfo)
 
-        '''                
+        '''
+        df6['animal'] = df6['animal'].replace('snake', 'python')
+                        
         6-17 snake 를 python 으로 값을 변경
         ic| df6:    animal  age  visits  priority
                  a     cat  2.5       1      True
@@ -513,7 +599,9 @@ class MyPan(object):
         dfo = self.animal_df2
         an = pd.pivot_table(dfo, index=['animal'], columns=['visits'])
         ic(an)
-        '''                  
+        '''
+        df6 = df6.pivot_table(index='animal', columns='visits', values='age', aggfunc='mean')                  
+        
         6-18 각각의 동물 유형과 방문 횟수에 대해, 평균나이 출력,
         즉,각 행은 animal 이고, 각 열은 visits 이며, 값은 평균연령
         (힌트, 피벗 테이블을 활용해야 함)
@@ -525,9 +613,14 @@ class MyPan(object):
         '''
     def quiz_7(self):
         df = pd.DataFrame({'A' : [1,2,3,4,4,4,5,6,7,7,7,1,2,3,4,5,6,7]}).drop_duplicates()
-        ic(type(df))
+        ic(type(df['A']))
         ic(df)
-        '''    
+        '''
+        df7 = pd.DataFrame({'A': [1, 2, 2, 3, 4, 5,6, 7, 7]})
+        df7 = df7.drop_duplicates()
+        ic(type(df7['A']))
+        ic(df7)
+            
         Q7. 키값 A와 중복된 값이 제거된 1,2,3,4,5,6,7 이 출력
         ic| type(df7['A']): <class 'pandas.core.series.Series'>
           ic| df7:    A
@@ -541,8 +634,13 @@ class MyPan(object):
         '''
 
     def quiz_8(self):
-        df = pd.DataFrame()
-        '''    
+        # df = pd.DataFrame()
+        df8 = pd.DataFrame(np.random.random(size=(5, 3)))
+        df8 = df8.sub(df8.mean(axis=1), axis=0)
+        ic(df8)
+        '''
+        
+            
         Q8. 행의 각 요소에서 행의 평균을 뺀 값을 출력하되 부분집합으로 가로출력
         ic| df8:           0         1         2
                  0 -0.095803 -0.151800  0.247603
@@ -552,16 +650,22 @@ class MyPan(object):
                  4  0.059283  0.010734 -0.070017
         '''
     def quiz_9(self):
-        dfo = self.animal_df2
-        ic(dfo.sum().idxmax())
-        '''                
+        df9 = pd.DataFrame(np.random.random(size=(5, 10)), columns=list('abcdefghij'))
+        ic(df9.sum().idxmax())
+        '''
+        idmax() : 데이터 프레임 내 값 가운데 최고값의 인덱스 위치 반환
+                        
         Q9. 가장 작은 합계를 가진 숫자열의 열을 출력(최대값은 max)
         ic| df9.sum().idxmax(): 'b'
         '''
 
     def quiz_10(self):
-        pass
-        '''    
+        df10 = pd.DataFrame(np.random.randint(0, 2, size=(10, 3)))
+        ic(df10)
+        ic(len(df10) - df10.duplicated(keep=False).sum())
+        ic(df10.drop_duplicates(keep=False))
+        '''
+            
         Q10. 중복된 값이 없는 유니크한 열의 카운트 출력(중복되지 않은 행은 몇 개..)
         ic| df10:    0  1  2
                   0  1  0  0
@@ -584,7 +688,17 @@ class MyPan(object):
         '''
 
     def quiz_11(self):
-        pass
+        nan = np.nan
+        data = [[0.04, nan, nan, 0.25, nan, 0.43, 0.71, 0.51, nan, nan],
+                [nan, nan, nan, 0.04, 0.76, nan, nan, 0.67, 0.76, 0.16],
+                [nan, nan, 0.5, nan, 0.31, 0.4, nan, nan, 0.24, 0.01],
+                [0.49, nan, nan, 0.62, 0.73, 0.26, 0.85, nan, nan, nan],
+                [nan, nan, 0.41, nan, 0.05, nan, 0.61, nan, 0.48, 0.68]]
+        columns = list('abcdefghij')
+        df11 = pd.DataFrame(data, columns=columns)
+        ic(type(df11.isnull()))
+        df11 = (df11.isnull().cumsum(axis=1) == 3).idxmax(axis=1)
+        ic(df11)
 
         '''  
         Q11. 체의 각 행에 대해 세번째 NaN 값이 들어 있는 열을 찾으시오. 일련의 열 레이블을 반환해야 합니다.
@@ -605,7 +719,12 @@ class MyPan(object):
         '''
 
     def quiz_12(self):
-        pass
+        df12 = pd.DataFrame({'grps': list('aaabbcaabcccbbc'),
+                             'vals': [12, 345, 3, 1, 45, 14, 4, 52, 54, 23, 235, 21, 57, 3, 87]})
+        ic(type(df12.groupby('grps')))
+        ic(type(df12.groupby('grps')['vals']))
+        df12 = df12.groupby('grps')['vals'].max()
+        ic(df12)
         '''  
         Q12. grps 에서 a, b, c 별로 가장 큰 값
             df12 = pd.DataFrame({'grps': list('aaabbcaabcccbbc'),
@@ -620,7 +739,11 @@ class MyPan(object):
         '''
 
     def quiz_13(self):
-        pass
+        print('Q13. 다음 DF13 객체를 list 로 변환')
+        df13 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+        ls = df13.values.tolist()
+        ic(type(ls))
+        ic(df13.values.tolist())
         '''  
         Q13. 다음 DF13 객체를 list 로 변환
         df13 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
@@ -629,7 +752,9 @@ class MyPan(object):
         '''
 
     def quiz_14(self):
-        pass
+        print('Q14. 아래 결과로 출력되는 DF 객체 전환 코드작성')
+        df14 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+        ic(df14.to_dict())
 
         '''  
         Q14. 아래 결과로 출력되는 DF 객체 전환 코드작성

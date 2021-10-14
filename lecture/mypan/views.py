@@ -6,4 +6,4 @@ from lecture.mypan.Quiz import MyPan
 
 if __name__ == '__main__':
     mpd = MyPan()
-    ic(display(mpd.quiz_5_1()))
+    ic(display(mpd.quiz_10()))
